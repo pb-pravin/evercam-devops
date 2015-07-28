@@ -9,10 +9,9 @@ setgid root
 console log
 
 env HOME=/home/{{user_name}}
-env {{env_vars.snap_iv}}
-env {{env_vars.snap_key}}
-env {{env_vars.aws_access_key}}
-env {{env_vars.aws_secret_key}}
-env {{env_vars.evercam_api}}
+{% for key, value in env_vars.items() %}
+env {{value}}
+{% endfor %}
 
 exec watch -n1 '/usr/local/bin/run_evercam_media.sh'
+

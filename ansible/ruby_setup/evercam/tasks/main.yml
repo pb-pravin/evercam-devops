@@ -4,23 +4,29 @@
 - name: Copy .env for the Dashboard
   template: src="dotenv.dash.j2" dest="{{ evercam_dash_dir }}/.env"
 
+- name: Install bundler
+  sudo_user: "{{ user_name }} -i"
+  shell: gem install bundler
+  args:
+    chdir: "{{evercam_api_dir}}"
+
 - name: Install gems for the API
   sudo_user: "{{ user_name }} -i"
   shell: bundle
   args:
     chdir: "{{evercam_api_dir}}"
 
-- name: Clone production database
-  sudo_user: "{{ user_name }} -i"
-  shell: ./scripts/clone
-  args:
-    chdir: "{{evercam_api_dir}}"
+# - name: Create database
+#   sudo_user: "{{ user_name }} -i"
+#   shell: ./scripts/create
+#   args:
+#     chdir: "{{evercam_api_dir}}"
 
-- name: Run database migrations
-  sudo_user: "{{ user_name }} -i"
-  shell: NO_FAKE_S3=true bundle exec rake db:migrate
-  args:
-    chdir: "{{evercam_api_dir}}"
+# - name: Run database migrations
+#   sudo_user: "{{ user_name }} -i"
+#   shell: NO_FAKE_S3=true bundle exec rake db:migrate
+#   args:
+#     chdir: "{{evercam_api_dir}}"
 
 - name: Install gems for the Dashboard
   sudo_user: "{{ user_name }} -i"

@@ -5,6 +5,8 @@
     - vars.yml
     - ../../private_vars_media.yml
   roles:
-    - ffmpeg
-    - nginx
-    - media
+    # - { role: deps }
+    # - { role: ANXS.postgresql, sudo: yes }
+    # - { role: ffmpeg }
+    # - { role: nginx }
+    - { role: media }

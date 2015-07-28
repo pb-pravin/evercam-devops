@@ -1,3 +1,5 @@
+user {{user_name}} {{user_name}};
+
 worker_processes  1;
 
 error_log  logs/error.log  info;
@@ -13,6 +15,11 @@ http {
     proxy_set_header            Host            $http_host;
     proxy_set_header            X-Real-IP       $remote_addr;
     proxy_set_header            X-Forwared-For  $proxy_add_x_forwarded_for;
+
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+    }
 
     upstream media_evercam {
         server 127.0.0.1:4000;
@@ -52,6 +59,43 @@ http {
 
         location / {
             proxy_pass http://media_evercam;
+        }
+        location /ws {
+            proxy_pass http://media_evercam/ws;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+        }
+        location /hls {
+            types {
+                application/vnd.apple.mpegurl m3u8;
+                video/mp2t ts;
+            }
+            root /tmp;
+            add_header Cache-Control no-cache;
+        }
+    }
+}
+
+
+rtmp {
+    server {
+        listen 1935;
+
+        chunk_size 1024;
+        buflen 10ms;
+        notify_method get;
+
+		application live {
+        live on;
+        hls on;
+        hls_path /tmp/hls;
+        hls_fragment_naming system;
+        hls_nested on;
+        hls_cleanup on;
+        on_play http://127.0.0.1:4000/on_play;
+
+        allow publish 127.0.0.1;
         }
     }
 }

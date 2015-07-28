@@ -1,5 +1,5 @@
 - name: Update Nginx configuration
-  template: src=nginx.conf
+  template: src=nginx.conf.j2
             dest=/usr/local/nginx/conf/nginx.conf
 
 - name: Check Nginx configuration
@@ -18,6 +18,12 @@
 
 - name: Allow access to port 443
   ufw: rule=allow port=443
+
+- name: Allow access to port 1935
+  ufw: rule=allow port=1935
+
+- name: Allow access to port 8080
+  ufw: rule=allow port=8080
 
 - name: Enable firewall
   ufw: state=enabled

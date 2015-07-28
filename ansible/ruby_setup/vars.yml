@@ -1,6 +1,6 @@
 user_name: vagrant
-evercam_api_dir: /vagrant/evercam_api
-evercam_dash_dir: /vagrant/evercam_dashboard
+evercam_api_dir: /vagrant/evercam-api
+evercam_dash_dir: /vagrant/evercam-dashboard
 
 rvm1_rubies:
   - 'ruby-2.2.0'

@@ -4,5 +4,5 @@
   failed_when: False
 
 - include: install.yml
-  when: ffmpeg_installed.rc != 0
+  # when: ffmpeg_installed.rc != 0
   sudo: True
