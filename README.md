@@ -5,7 +5,6 @@
 
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * [Vagrant](http://www.vagrantup.com/downloads.html)
-* [Python](https://www.python.org/downloads/)
 * [Git](http://git-scm.com/downloads)
 
 #### Clone this repository and it's submodules
@@ -15,29 +14,6 @@ git clone https://github.com/evercam/evercam-devops.git && cd evercam-devops
 git pull && git submodule init && git submodule update && git submodule status
 git submodule foreach --recursive git checkout master
 git submodule foreach --recursive git pull
-```
-
-#### Install Ansible dependencies
-
-```
-sudo pip install ansible
-sudo ansible-galaxy install -r ansible/requirements.yml --force
-```
-
-#### Create a `private_vars_devops.yml` file and fill it in with your information
-
-```
-aws_access_key: "aws_access_key"
-aws_secret_key: "aws_secret_key"
-```
-
-#### Copy example `.env` file into required directories
-
-```
-cp .env evercam-api/
-cp .env evercam-dashboard/
-cp .env evercam-models/
-cp .env evercam-media/
 ```
 
 #### Run Vagrant and ssh into the VM
