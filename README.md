@@ -10,7 +10,7 @@
 #### Clone this repository and it's submodules
 
 ```
-git clone https://github.com/evercam/evercam-devops.git && cd evercam-devops
+git clone https://github.com/evercam/evercam-devops.git && cd evercam-devops && git checkout vagrant-box
 git pull && git submodule init && git submodule update && git submodule status
 git submodule foreach --recursive git checkout master
 git submodule foreach --recursive git pull
