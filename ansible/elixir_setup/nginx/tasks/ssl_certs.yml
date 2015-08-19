@@ -1,31 +1,33 @@
-- local_action: stat path="{{role_path}}/files/media_evercam_io.key"
-  register: local_key
+# - local_action: stat path="{{role_path}}/files/media_evercam_io.key"
+#   register: local_key
 
-- local_action: stat path="{{role_path}}/files/media_evercam_io.cert"
-  register: local_cert
+# - local_action: stat path="{{role_path}}/files/media_evercam_io.cert"
+#   register: local_cert
 
 - name: Generate SSL key
   shell: openssl genrsa -out media_evercam_io.key 2048
   args:
     chdir: "/etc/ssl/"
-  when: production == False and local_key.stat.exists == False
+  when: production == False
+   # and local_key.stat.exists == False
 
 - name: Generate SSL certificate
   shell: openssl req -new -x509 -key media_evercam_io.key -out media_evercam_io.pem -days 3650 -subj /CN=media.evercam.io
   args:
     chdir: "/etc/ssl/"
-  when: production == False and local_key.stat.exists == False
+  when: production == False
+  #  and local_key.stat.exists == False
 
-- name: Copy local SSL .pem file
-  sudo: yes
-  copy:
-    src: "media_evercam_io.pem"
-    dest: "/etc/ssl/media_evercam_io.pem"
-  when: local_cert.stat.exists == True
+# - name: Copy local SSL .pem file
+#   sudo: yes
+#   copy:
+#     src: "media_evercam_io.pem"
+#     dest: "/etc/ssl/media_evercam_io.pem"
+#   when: local_cert.stat.exists == True
 
-- name: Copy local SSL .key file
-  sudo: yes
-  copy:
-    src: "media_evercam_io.key"
-    dest: "/etc/ssl/media_evercam_io.key"
-  when: local_key.stat.exists == True
+# - name: Copy local SSL .key file
+#   sudo: yes
+#   copy:
+#     src: "media_evercam_io.key"
+#     dest: "/etc/ssl/media_evercam_io.key"
+#   when: local_key.stat.exists == True

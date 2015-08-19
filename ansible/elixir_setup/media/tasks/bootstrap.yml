@@ -8,6 +8,7 @@
   local_action:
     shell
     chdir={{local_media_dir}}
+    make
     {{mix_env_vars}} mix do deps.get, release
 
 - name: Check new version of Elixir server
