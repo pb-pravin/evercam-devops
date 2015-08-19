@@ -61,10 +61,6 @@ cd /vagrant/evercam-dashboard
 bundle install
 bundle exec rspec --pattern 'c*/*_spec.rb,h*/*_spec.rb'
 
-echo -e "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
-sudo apt-get update
-sudo apt-get --yes --force-yes install libjpeg-dev
-
 cd /vagrant/evercam-media
 npm install
 mix local.hex
