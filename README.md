@@ -72,30 +72,30 @@ mix deps.get && mix deps.compile && mix compile
 mix test
 ```
 
-#### You're done!
+You're done!
 
-Now start the API server:
+### Now start the API server:
 
 ```
 cd /vagrant/evercam-api
 bundle exec rackup -o 0.0.0.0
 ```
 
-And in another terminal tab/window start the Dashboard server:
+### And in another terminal tab/window start the Dashboard server:
 
 ```
 cd /vagrant/evercam-dashboard
 EVERCAM_LOCAL=true bundle exec rails server -b 0.0.0.0
 ```
 
-And in another terminal tab/window start the Media server:
+### And in another terminal tab/window start the Media server:
 
 ```
 cd /vagrant/evercam-media
 EVERCAM_LOCAL=true mix phoenix.server
 ```
 
-Another way to execute media server:
+### Another way to execute media server:
 
 ```
 cd /vagrant/evercam-media
@@ -104,7 +104,7 @@ cp -r priv_dir/ rel/evercam_media/priv_dir
 EVERCAM_LOCAL=true rel/evercam_media/bin/evercam_media foreground
 ```
 
-And in another terminal tab/window start the Phony camera for offline tests:
+### And in another terminal tab/window start the Phony camera for offline tests:
 
 ```
 cd /vagrant/phony_camera
