@@ -95,6 +95,14 @@ cd /vagrant/evercam-media
 EVERCAM_LOCAL=true mix phoenix.server
 ```
 
+Another way to execute media server:
+
+```
+cd /vagrant/evercam-media
+mix release
+rel/evercam_media/bin/evercam_media foreground
+```
+
 And in another terminal tab/window start the Phony camera for offline tests:
 
 ```

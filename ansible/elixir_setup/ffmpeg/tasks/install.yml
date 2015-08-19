@@ -12,6 +12,7 @@
     - libgpac-dev
     - libtheora-dev
     - libtool
+    - libjpeg-dev
     - libvorbis-dev
     - pkg-config
     - texi2html
