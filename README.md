@@ -100,7 +100,7 @@ Another way to execute media server:
 ```
 cd /vagrant/evercam-media
 mix release
-rel/evercam_media/bin/evercam_media foreground
+EVERCAM_LOCAL=true rel/evercam_media/bin/evercam_media foreground
 ```
 
 And in another terminal tab/window start the Phony camera for offline tests:
