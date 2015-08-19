@@ -100,6 +100,7 @@ Another way to execute media server:
 ```
 cd /vagrant/evercam-media
 mix release
+cp -r priv_dir/ rel/evercam_media/priv_dir
 EVERCAM_LOCAL=true rel/evercam_media/bin/evercam_media foreground
 ```
 
