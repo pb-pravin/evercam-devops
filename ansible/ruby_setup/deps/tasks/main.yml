@@ -14,6 +14,7 @@
     - python-psycopg2
     - python-software-properties
     - libpq-dev
+    - libjpeg-dev
 
 - name: Place s3_put.sh in PATH
   sudo: yes

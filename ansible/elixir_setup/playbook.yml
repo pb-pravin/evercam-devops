@@ -1,12 +1,14 @@
 - hosts: "{{target}}"
-  gather_facts: False
   user: "{{ansible_ssh_user}}"
   vars_files:
     - vars.yml
     - ../../private_vars_media.yml
   vars:
     - production: True
+    - user_name: "{{ansible_ssh_user}}"
   roles:
+    - deps
+    - { role: ANXS.postgresql, sudo: yes }
     - ffmpeg
     - nginx
     - media

@@ -18,7 +18,7 @@
   local_action:
     shell
     chdir={{local_media_dir}}
-    {{mix_env_vars}} mix do deps.get, release
+    {{mix_env_vars}} {{media_env_vars}} mix do deps.get, release
 
 - name: Checkout new version of Elixir server
   local_action:
@@ -30,12 +30,12 @@
   local_action:
     shell
     chdir={{local_media_dir}}
-    {{mix_env_vars}} mix do deps.get, release
+    {{mix_env_vars}} {{media_env_vars}} mix do deps.get, release
 
 - name: Register new version of Elixir server
   local_action:
     shell
-    cat {{local_media_dir}}/rel/media/releases/start_erl.data | awk '{print $2}'
+    cat {{local_media_dir}}/rel/evercam_media/releases/start_erl.data | awk '{print $2}'
   register: new_media_version
 
 - name: Ensure there is a directory for the new version
@@ -43,11 +43,11 @@
 
 - name: Copy new release to the server
   copy:
-    src: "{{local_media_dir}}/rel/media/media-{{new_media_version.stdout}}.tar.gz"
+    src: "{{local_media_dir}}/rel/evercam_media/evercam_media-{{new_media_version.stdout}}.tar.gz"
     dest: "{{remote_media_dir}}/releases/{{new_media_version.stdout}}/media.tar.gz"
 
 - name: Upgrade production server to the new version
-  shell: "{{media_env_vars}} {{remote_media_dir}}/bin/media upgrade {{new_media_version.stdout}}"
+  shell: "{{media_env_vars}} {{remote_media_dir}}/bin/evercam_media upgrade {{new_media_version.stdout}}"
   register: upgrade_message
   changed_when: "'already installed' not in upgrade_message.stdout"
 

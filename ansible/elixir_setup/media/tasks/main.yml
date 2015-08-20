@@ -1,19 +1,19 @@
-- name: Check if Elixir release directory exists
-  stat: path={{remote_media_dir}}
-  register: release_exists
+# - name: Check if Elixir release directory exists
+#   stat: path={{remote_media_dir}}
+#   register: release_exists
 
-- include: cleanup.yml
+# - include: cleanup.yml
 
 - include: bootstrap.yml
-  when: release_exists.stat.exists == False
+#   # when: release_exists.stat.exists == False
 
-- include: upgrade.yml
-  when: release_exists.stat.exists == True
+# # - include: upgrade.yml
+# #   when: release_exists.stat.exists == True
 
-- include: cleanup.yml
+# - include: cleanup.yml
 
 - name: Check if Elixir server is running
-  command: "{{remote_media_dir}}/bin/media ping"
+  command: "{{remote_media_dir}}/bin/evercam_media ping"
   register: ping
   failed_when: "'pong' not in ping.stdout"
   changed_when: "ping.stdout != 'pong'"

@@ -4,6 +4,7 @@
     pkg: "{{item}}"
     state: present
   with_items:
+    - build-essential
     - libpcre3
     - libpcre3-dev
     - libssl-dev

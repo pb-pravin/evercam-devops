@@ -1,0 +1,20 @@
+---
+- name: Register version output for Erlang
+  sudo_user: "{{ user_name }} -i"
+  shell: kerl active
+  register: erlang_version_output
+  changed_when: False
+  failed_when: False
+
+# install dependency libs
+- include: lib.yml
+  when: "'{{erlang_version}}' not in erlang_version_output.stdout"
+
+# install erlang with kerl
+- include: erlang.yml
+  when: "'{{erlang_version}}' not in erlang_version_output.stdout"
+
+# install elixir with github repo
+- include: elixir.yml
+  when: "'{{erlang_version}}' not in erlang_version_output.stdout"
+

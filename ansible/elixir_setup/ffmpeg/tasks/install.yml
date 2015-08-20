@@ -57,7 +57,7 @@
   with_items:
     - ./autogen.sh
     - ./configure --bindir={{ bin_dir }}
-    - make
+    - "make -j {{ansible_processor_cores}}"
     - make install
     - make distclean
 
@@ -68,7 +68,7 @@
     creates: "{{ bin_dir }}/x264"
   with_items:
     - ./configure --bindir={{ bin_dir }} --enable-static
-    - make
+    - "make -j {{ansible_processor_cores}}"
     - make install
     - make distclean
 
@@ -80,7 +80,7 @@
   with_items:
     - autoreconf -fiv
     - ./configure --disable-shared
-    - make
+    - "make -j {{ansible_processor_cores}}"
     - make install
     - make distclean
 
@@ -92,7 +92,7 @@
   with_items:
     - ./autogen.sh
     - ./configure --disable-shared
-    - make
+    - "make -j {{ansible_processor_cores}}"
     - make install
     - make distclean
 
@@ -103,7 +103,7 @@
     creates: "{{ lib_dir }}/libvpx.a"
   with_items:
     - ./configure --disable-shared
-    - make
+    - "make -j {{ansible_processor_cores}}"
     - make install
     - make clean
 
@@ -114,6 +114,6 @@
     creates: "{{ bin_dir }}/ffmpeg"
   with_items:
     - ./configure --bindir={{ bin_dir }} --extra-libs=-ldl --enable-gpl --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree
-    - make
+    - "make -j {{ansible_processor_cores}}"
     - make install
     - make distclean

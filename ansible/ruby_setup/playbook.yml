@@ -12,7 +12,7 @@
     - deps
     - { role: "../elixir_setup/ffmpeg"}
     - { role: "../elixir_setup/nginx"}
-    - { role: ohr486.elixir, erlang_version: 17.5, elixir_version: v1.0.4 }
+    - { role: elixir, erlang_version: 17.5, elixir_version: v1.0.4 }
     - nodesource.node
     - rvm_io.rvm1-ruby
     - ANXS.postgresql

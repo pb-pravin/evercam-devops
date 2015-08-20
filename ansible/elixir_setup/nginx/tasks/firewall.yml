@@ -10,5 +10,8 @@
 - name: Allow access to port 443
   ufw: rule=allow port=443
 
+- name: Allow access to port 1935
+  ufw: rule=allow port=1935
+
 - name: Enable firewall
   ufw: state=enabled

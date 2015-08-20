@@ -1,0 +1,50 @@
+- name: Ensure /usr/local/bin dir exists
+  file: path=/usr/local/bin state=directory
+  sudo: yes
+
+- name: Update apt cache
+  action: apt update_cache=yes
+  sudo: yes
+
+- name: Make sure the required packages are installed
+  sudo: yes
+  apt:
+    pkg: "{{item}}"
+    state: present
+  with_items:
+    - htop
+    - libjpeg-dev
+
+- name: Check if Goon is present
+  stat: path=/usr/local/bin/goon
+  register: goon_present
+
+- name: Download Goon
+  get_url:
+    url: https://github.com/alco/goon/releases/download/v1.1.1/goon_linux_amd64.tar.gz
+    dest: /tmp/goon_linux_amd64.tar.gz
+  when: goon_present.stat.exists == False
+
+- name: Unpack Goon
+  command: tar -xvzf /tmp/goon_linux_amd64.tar.gz
+  args:
+    chdir: /tmp
+    creates: /tmp/goon
+  when: goon_present.stat.exists == False
+
+- name: Add Goon to PATH
+  sudo: yes
+  command: mv /tmp/goon /usr/local/bin
+  args:
+    creates: /usr/local/bin/goon
+    removes: /tmp/goon
+  when: goon_present.stat.exists == False
+
+- name: Upload s3_put.sh
+  sudo: yes
+  copy:
+    mode: 0755
+    owner: "{{user_name}}"
+    group: "{{user_name}}"
+    src: s3_put.sh
+    dest: /usr/local/bin/s3_put.sh

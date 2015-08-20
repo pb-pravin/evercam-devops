@@ -1,4 +1,4 @@
-local_media_dir: ~/evercam/media
+local_media_dir: ~/evercam/evercam-media
 remote_media_dir: ~/evercam_media
 version_to_deploy: "{{VERSION|default('master')}}"
 
@@ -19,3 +19,10 @@ bin_dir: "/usr/local/bin"
 
 media_env_vars: "{% for key, value in env_vars.items() %}{{value}} {% endfor %}"
 mix_env_vars: "MIX_ENV=prod PORT=4000"
+
+ansible_distribution_release: "trusty"
+postgresql_version: 9.4
+postgresql_ext_postgis_version: 2.1
+postgresql_ext_install_postgis: yes
+postgresql_ext_install_contrib: yes
+postgresql_ssl: on
