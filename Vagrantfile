@@ -13,10 +13,10 @@ Vagrant.configure(2) do |config|
 
   # TODO: Disable this for Windows users:
   # config.vm.synced_folder ".", "/vagrant", type: "nfs"
-  config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
-  end
+  # config.vm.provider "virtualbox" do |vb|
+  #   vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+  #   vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+  # end
 
   config.vm.provider "virtualbox" do |vb|
     vb.cpus = 4
